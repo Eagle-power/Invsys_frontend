@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.glass-card {
+  font-family: 'Times New Roman', '' ;
+  background: rgba(255, 255, 255, 0.15); /* More subtle transparency */
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* This ensures the text INSIDE the card is sharp and readable */
+.glass-card .card-title,
+.glass-card .card-description,
+.glass-card .card-content {
+  color: #1f2937; /* A dark gray for high contrast */
+}
+
+.glass-card .text-muted-foreground {
+  color: #4b5563; /* A slightly lighter gray for secondary text */
+}

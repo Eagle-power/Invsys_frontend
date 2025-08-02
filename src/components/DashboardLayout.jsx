@@ -9,8 +9,8 @@ import {
   ShoppingCart,
   Truck,
   ChevronDown,
-  PackageMinus ,
-  PackageCheck ,
+  PackageMinus,
+  PackageCheck,
   User,
   FolderTree,
   Menu,
@@ -19,10 +19,12 @@ import {
   History,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectCurrentUser } from "../features/auth/authSlice";
 import { Toaster, toast } from "sonner";
+import Footer from "./Footer";
 
 const DashboardLayout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,25 +59,57 @@ const DashboardLayout = () => {
     navLinks.push(
       { to: "/dashboard/stores", icon: <Store size={20} />, label: "Stores" },
       { to: "/dashboard/products", icon: <Box size={20} />, label: "Products" },
-      { to: "/dashboard/inventory", icon: <Warehouse size={20} />, label: "Inventory"},
-      { to: "/dashboard/categories", icon: <FolderTree size={20} />, label: "Categories"},
-      { to: "/dashboard/suppliers", icon: <Truck size={20} />, label: "Suppliers" },
+      {
+        to: "/dashboard/inventory",
+        icon: <Warehouse size={20} />,
+        label: "Inventory",
+      },
+      {
+        to: "/dashboard/categories",
+        icon: <FolderTree size={20} />,
+        label: "Categories",
+      },
+      {
+        to: "/dashboard/suppliers",
+        icon: <Truck size={20} />,
+        label: "Suppliers",
+      },
       { to: "/dashboard/users", icon: <Users size={20} />, label: "Users" },
-      { to: "/dashboard/customers", icon:<Contact  size={20} /> , label: "Customer" },
-      { to: "/dashboard/restock-management", icon: <PackageCheck size={20} />, label: "Restock Mgt" } ,
-      { to: "/dashboard/sales-history", icon: <History size={20} />, label: "Sales History" }
+      {
+        to: "/dashboard/customers",
+        icon: <Contact size={20} />,
+        label: "Customer",
+      },
+      {
+        to: "/dashboard/restock-management",
+        icon: <PackageCheck size={20} />,
+        label: "Restock Mgt",
+      },
+      {
+        to: "/dashboard/sales-history",
+        icon: <History size={20} />,
+        label: "Sales History",
+      }
     );
   } else if (userRole === "manager") {
-    navLinks.push({
-      to: "/dashboard/inventory",
-      icon: <Warehouse size={20} />,
-      label: "Inventory",
-    },
-    { to: "/dashboard/restock-requests", icon: <PackageMinus size={20} />, label: "Restock Requests" }, 
-    { to: "/dashboard/sales-history", icon: <History size={20} />, label: "Sales History" }
-  );
-  }
-   else if (userRole === "staff") {
+    navLinks.push(
+      {
+        to: "/dashboard/inventory",
+        icon: <Warehouse size={20} />,
+        label: "Inventory",
+      },
+      {
+        to: "/dashboard/restock-requests",
+        icon: <PackageMinus size={20} />,
+        label: "Restock Requests",
+      },
+      {
+        to: "/dashboard/sales-history",
+        icon: <History size={20} />,
+        label: "Sales History",
+      }
+    );
+  } else if (userRole === "staff") {
     // Staff can now also see the sales history
     navLinks.push({
       to: "/dashboard/sales-history",
@@ -105,7 +139,7 @@ const DashboardLayout = () => {
   );
 
   return (
-    <div className="flex h-screen w-full bg-gray-100">
+    <div className="flex h-screen w-full bg-gray-100" onContextMenu={(e) => e.preventDefault()}>
       {/* Sidebar for larger screens */}
       <aside className="hidden w-64 flex-col border-r bg-white p-4 sm:flex">
         <div className="mb-8 flex items-center gap-2">
@@ -118,9 +152,9 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex flex-1 flex-col">
         {/* Header */}
-        <header className="relative z-10 flex h-16 items-center justify-between border-b bg-white px-6 sm:justify-end">
+        <header className="relative z-10 flex h-16 items-center justify-between border-b bg-white px-6 sm:justify-end" onContextMenu={(e) => e.preventDefault()}>
           {/* Mobile Hamburger Menu */}
-          <div className="sm:hidden">
+          <div className="sm:hidden" onContextMenu={(e) => e.preventDefault()}>
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -138,7 +172,7 @@ const DashboardLayout = () => {
           </div>
 
           {/* User Info and Logout Button */}
-          <div className="ml-auto flex items-center gap-4">
+          <div className="ml-auto flex items-center gap-4" onContextMenu={(e) => e.preventDefault()}>
             <span className="text-gray-700 font-medium hidden sm:inline">
               Hello, {user?.name || "User"}!
             </span>
@@ -154,8 +188,10 @@ const DashboardLayout = () => {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto no-scrollbar" onContextMenu={(e) => e.preventDefault()}>
           <Outlet />
+          <Separator />
+          <Footer />
         </main>
         <Toaster richColors />
       </div>

@@ -17,16 +17,22 @@ import SalesHistory from "./pages/sales/SalesHistory";
 import Profile from "./pages/profile/Profile";
 import RestockRequests from "./pages/restock/RestockRequests";
 import RestockManagement from './pages/restock/RestockManagement';
+import PublicLayout from "./components/PublicLayout";
+import About from "./pages/public/About";
+import Contact from "./pages/public/Contact";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Public Routes */}
+        {/* Public Routes */}
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route index element={<Login />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
 
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
@@ -46,7 +52,6 @@ function App() {
               <Route path="restock-management" element={<RestockManagement />} />
             </Route>
           </Route>
-        </Route>
       </Routes>
     </BrowserRouter>
   );

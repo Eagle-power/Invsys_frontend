@@ -48,7 +48,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex-1  flex items-center justify-center bg-gray-100">
       <Card className="mx-auto max-w-sm w-full shadow-lg">
         <CardHeader>
           <CardTitle className="text-xl text-center pb-2">Sign Up</CardTitle>

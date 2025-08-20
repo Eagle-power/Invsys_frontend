@@ -82,6 +82,8 @@ import PendingApproval from "./pages/PendingApproval";
 import Assignment from "./pages/Assignment";
 import VerifyEmail from "./pages/VerifyEmail";
 import PublicLayout from "./components/PublicLayout";
+import About from "./pages/public/About";
+import Contact from "./pages/public/Contact";
 
 function App() {
   return (
